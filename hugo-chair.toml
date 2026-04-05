@@ -1,0 +1,62 @@
+# ============================================================
+# hugo.toml - chair-site Hugo設定
+# 配置場所: af-sites/chair-site/hugo.toml
+# ============================================================
+
+baseURL = "https://YOUR_USERNAME.github.io/chair-site/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
+title = "オフィスチェア比較レビュー｜腰痛持ちが選ぶ本当にいい椅子"
+theme = ""  # テーマなし（Pico.css + カスタムレイアウト）
+
+# 日本語設定
+[languages.ja]
+  languageName = "日本語"
+  weight = 1
+
+# タクソノミー（カテゴリ・タグ）
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# パーマリンク設定（slug = タイムスタンプ形式）
+[permalinks]
+  posts = "/posts/:slug/"
+
+# マークダウン設定
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true   # HTMLタグを許可（アフィリエイトリンク用）
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
+
+# SEO・メタ設定
+[params]
+  description = "腰痛持ちのためのオフィスチェア徹底比較。実際に使って感じたメリット・デメリットを正直にレビューします。"
+  author = "chair-review"
+  genre = "chair"
+  # Pico.css CDN（バージョン固定推奨）
+  picocss_url = "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+  # アフィリエイトID（設定後に変更）
+  amazon_tracking_id = "YOUR-AMAZON-ID-22"
+  rakuten_affiliate_id = "YOUR-RAKUTEN-ID"
+
+# サイトマップ
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+# robots.txt 自動生成
+enableRobotsTXT = true
+
+# ページネーション
+paginate = 10
+
+# 出力形式
+[outputs]
+  home = ["HTML", "RSS"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]

@@ -1,0 +1,59 @@
+{{ define "main" }}
+<main>
+
+  <!-- ヒーローセクション -->
+  <section style="text-align:center; padding:2.5rem 0 2rem; border-bottom:1px solid #e5e7eb;">
+    <h1 style="font-size:1.7rem; margin-bottom:0.5rem;">{{ .Site.Title }}</h1>
+    <p style="color:#6b7280; max-width:600px; margin:0 auto;">
+      {{ .Site.Params.description }}
+    </p>
+  </section>
+
+  <!-- 最新記事セクション -->
+  <section style="margin-top:2rem;">
+    <h2 style="font-size:1.2rem; border-left:4px solid #2563eb; padding-left:0.75rem;">
+      最新レビュー記事
+    </h2>
+
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ range first 10 $posts }}
+    <article class="post-card">
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+      <div class="meta">
+        📅 {{ .Date.Format "2006年01月02日" }}
+        {{- with .Params.price }} &nbsp;|&nbsp; 💰 <span class="price-badge">{{ . }}</span>{{ end }}
+        {{- with .Params.warranty }} &nbsp;|&nbsp; 🛡️ {{ . }}{{ end }}
+      </div>
+      {{ with .Params.description }}
+      <p style="margin-top:0.5rem; font-size:0.9rem; color:#374151;">{{ . }}</p>
+      {{ end }}
+      <a href="{{ .Permalink }}" style="font-size:0.9rem; color:#2563eb;">
+        続きを読む &rarr;
+      </a>
+    </article>
+    {{ end }}
+
+    {{ if gt (len $posts) 10 }}
+    <div style="text-align:center; margin-top:1rem;">
+      <a href="{{ .Site.BaseURL }}posts/" role="button" class="secondary">
+        すべての記事を見る（{{ len $posts }}件）
+      </a>
+    </div>
+    {{ end }}
+  </section>
+
+  <!-- サイト紹介 -->
+  <section style="margin-top:2.5rem; background:#f0f9ff; border-radius:8px; padding:1.5rem;">
+    <h2 style="font-size:1.1rem; margin-top:0;">このサイトについて</h2>
+    <p style="font-size:0.9rem; color:#374151;">
+      腰痛持ちの筆者が、実際にオフィスチェアを使って感じた
+      リアルな評価をお届けします。高額な椅子だからこそ、
+      購入前に知っておくべき情報を正直にレビューしています。
+    </p>
+    <p style="font-size:0.85rem; color:#6b7280; margin-bottom:0;">
+      ※本サイトはアフィリエイト広告を利用しています。
+    </p>
+  </section>
+
+</main>
+{{ end }}

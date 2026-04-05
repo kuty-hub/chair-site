@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- タイトル -->
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+  <!-- SEO メタ -->
+  <meta name="description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <!-- OGP -->
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Pico.css CDN -->
+  <link rel="stylesheet" href="{{ .Site.Params.picocss_url }}">
+
+  <!-- カスタムCSS -->
+  <style>
+    /* ============================================================
+       サイト共通スタイル（Pico.css補完）
+    ============================================================ */
+
+    :root {
+      --af-accent: #2563eb;        /* メインカラー（青） */
+      --af-accent-hover: #1d4ed8;
+      --af-warn: #d97706;          /* 警告色（アンバー） */
+      --af-success: #16a34a;       /* 成功色（緑） */
+      --af-border: #e5e7eb;
+      --af-bg-light: #f9fafb;
+      --af-text-muted: #6b7280;
+      --content-max: 860px;
+    }
+
+    /* ヘッダー */
+    .site-header {
+      border-bottom: 3px solid var(--af-accent);
+      padding: 0.75rem 0;
+      margin-bottom: 0;
+    }
+    .site-header nav a.site-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--af-accent);
+      text-decoration: none;
+    }
+    .site-header nav a.site-title:hover {
+      color: var(--af-accent-hover);
+    }
+
+    /* メインコンテンツ幅制御 */
+    main {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+
+    /* パンくず */
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: var(--af-text-muted);
+      margin-bottom: 1rem;
+    }
+    .breadcrumb a { color: var(--af-accent); }
+
+    /* 記事カード（一覧用） */
+    .post-card {
+      border: 1px solid var(--af-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      background: var(--af-bg-light);
+      transition: box-shadow 0.2s;
+    }
+    .post-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .post-card h2 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+    .post-card h2 a { color: var(--af-accent); text-decoration: none; }
+    .post-card h2 a:hover { text-decoration: underline; }
+    .post-card .meta { font-size: 0.82rem; color: var(--af-text-muted); }
+
+    /* 価格バッジ */
+    .price-badge {
+      display: inline-block;
+      background: var(--af-accent);
+      color: #fff;
+      font-weight: 700;
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    /* アフィリエイトボタン */
+    .af-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin: 1.25rem 0;
+    }
+    .af-btn {
+      display: inline-block;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .af-btn:hover { opacity: 0.85; }
+    .af-btn-amazon { background: #FF9900; color: #fff; }
+    .af-btn-rakuten { background: #BF0000; color: #fff; }
+    .af-btn-yahoo   { background: #E60012; color: #fff; }
+
+    /* 警告ボックス（価格確認）*/
+    .price-note {
+      border-left: 4px solid var(--af-warn);
+      background: #fffbeb;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      border-radius: 0 6px 6px 0;
+      color: #92400e;
+    }
+
+    /* FAQ */
+    details.faq {
+      border: 1px solid var(--af-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.75rem;
+    }
+    details.faq summary {
+      font-weight: 600;
+      cursor: pointer;
+    }
+    details.faq p { margin: 0.5rem 0 0; }
+
+    /* フッター */
+    .site-footer {
+      border-top: 1px solid var(--af-border);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--af-text-muted);
+      margin-top: 3rem;
+    }
+    .site-footer a { color: var(--af-text-muted); }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="container">
+      <nav>
+        <a class="site-title" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  {{ block "main" . }}{{ end }}
+
+  <!-- フッター -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        &copy; {{ now.Year }} {{ .Site.Title }} |
+        <a href="{{ .Site.BaseURL }}">ホーム</a> &nbsp;|&nbsp;
+        <a href="{{ .Site.BaseURL }}posts/">記事一覧</a> &nbsp;|&nbsp;
+        <a href="{{ .Site.BaseURL }}about/">このサイトについて</a>
+      </p>
+      <p style="margin-top:0.5rem; font-size:0.8rem;">
+        ※本サイトはアフィリエイト広告を利用しています。価格は購入時にご確認ください。
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{{ define "main" }}
+<main>
+
+  <h1>{{ .Title }}</h1>
+  <p style="color:#6b7280;">{{ len .Pages }} 件の記事</p>
+
+  <!-- 記事一覧 -->
+  {{ range .Paginator.Pages }}
+  <article class="post-card">
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <div class="meta">
+      📅 {{ .Date.Format "2006年01月02日" }}
+      {{- with .Params.price }} &nbsp;|&nbsp; 💰 <span class="price-badge">{{ . }}</span>{{ end }}
+      {{- with .Params.warranty }} &nbsp;|&nbsp; 🛡️ {{ . }}{{ end }}
+    </div>
+    {{ with .Params.description }}
+    <p style="margin-top:0.5rem; font-size:0.9rem; color:#374151;">{{ . }}</p>
+    {{ end }}
+    <a href="{{ .Permalink }}" style="font-size:0.9rem; color:#2563eb;">
+      続きを読む &rarr;
+    </a>
+  </article>
+  {{ end }}
+
+  <!-- ページネーション -->
+  {{ if gt .Paginator.TotalPages 1 }}
+  <nav style="display:flex; justify-content:center; gap:0.5rem; margin-top:2rem;">
+    {{ if .Paginator.HasPrev }}
+      <a href="{{ .Paginator.Prev.URL }}" role="button" class="secondary">← 前のページ</a>
+    {{ end }}
+    <span style="padding:0.5rem 1rem; color:#6b7280;">
+      {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}
+    </span>
+    {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}" role="button" class="secondary">次のページ →</a>
+    {{ end }}
+  </nav>
+  {{ end }}
+
+</main>
+{{ end }}

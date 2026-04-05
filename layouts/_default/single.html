@@ -1,0 +1,65 @@
+{{ define "main" }}
+<main>
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="{{ .Site.BaseURL }}">ホーム</a> &rsaquo;
+    <a href="{{ .Site.BaseURL }}posts/">記事一覧</a> &rsaquo;
+    <span>{{ .Title }}</span>
+  </nav>
+
+  <article>
+
+    <!-- 記事ヘッダー -->
+    <header>
+      <h1>{{ .Title }}</h1>
+      <div class="meta">
+        📅 {{ .Date.Format "2006年01月02日" }}
+        {{- with .Params.price }} &nbsp;|&nbsp; 💰 <span class="price-badge">{{ . }}</span>{{ end }}
+        {{- with .Params.warranty }} &nbsp;|&nbsp; 🛡️ 保証 {{ . }}{{ end }}
+      </div>
+    </header>
+
+    <hr>
+
+    <!-- 本文 -->
+    <div class="post-content">
+      {{ .Content }}
+    </div>
+
+    <hr>
+
+    <!-- タグ -->
+    {{ with .Params.tags }}
+    <div style="margin-top: 1rem;">
+      <strong>タグ:</strong>
+      {{ range . }}
+        <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}/"
+           style="display:inline-block; background:#e0e7ff; color:#3730a3;
+                  padding:0.15rem 0.6rem; border-radius:4px; font-size:0.82rem;
+                  margin:0.15rem; text-decoration:none;">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <!-- 前後記事ナビ -->
+    <nav style="display:flex; justify-content:space-between; margin-top:2rem; gap:1rem;">
+      {{ with .PrevInSection }}
+        <a href="{{ .Permalink }}" style="flex:1; padding:0.75rem; border:1px solid #e5e7eb;
+           border-radius:6px; text-decoration:none; font-size:0.9rem;">
+          &larr; {{ .Title }}
+        </a>
+      {{ else }}
+        <div style="flex:1;"></div>
+      {{ end }}
+      {{ with .NextInSection }}
+        <a href="{{ .Permalink }}" style="flex:1; padding:0.75rem; border:1px solid #e5e7eb;
+           border-radius:6px; text-decoration:none; font-size:0.9rem; text-align:right;">
+          {{ .Title }} &rarr;
+        </a>
+      {{ end }}
+    </nav>
+
+  </article>
+</main>
+{{ end }}
