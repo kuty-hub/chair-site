@@ -3,10 +3,10 @@
 # 配置場所: af-sites/chair-site/hugo.toml
 # ============================================================
 
-baseURL = "https://kuty-hub.github.io/chair-site/"
+baseURL = "https://kuty-hub.github.io/gadget-site/"
 languageCode = "ja"
 defaultContentLanguage = "ja"
-title = "オフィスチェア比較レビュー｜腰痛持ちが選ぶ本当にいい椅子"
+title = "ガジェット・家電レビュー｜実際に使って選ぶおすすめ製品"
 theme = ""  # テーマなし（Pico.css + カスタムレイアウト）
 
 # 日本語設定
@@ -34,14 +34,15 @@ theme = ""  # テーマなし（Pico.css + カスタムレイアウト）
 
 # SEO・メタ設定
 [params]
-  description = "腰痛持ちのためのオフィスチェア徹底比較。実際に使って感じたメリット・デメリットを正直にレビューします。"
+  description = "ガジェット・家電の徹底比較レビュー。実際に使って感じたメリット・デメリットを正直にレビューします。"
   author = "chair-review"
-  genre = "chair"
+  genre = "gadget"
   # Pico.css CDN（バージョン固定推奨）
   picocss_url = "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
   # アフィリエイトID（設定後に変更）
-  amazon_tracking_id = "YOUR-AMAZON-ID-22"
-  rakuten_affiliate_id = "YOUR-RAKUTEN-ID"
+  amazon_tracking_id = "chairreview22-22"
+  rakuten_affiliate_id = "52bc2ad9.fe24626e.52bc2ada.500f38d7"
+  google_site_verification = "ntnoAdHr037ui3gY9buZUuIRhwjZ-6AnS9-hsW6e8I4"
 
 # サイトマップ
 [sitemap]

@@ -1,38 +1,29 @@
 {{/*
   shortcodes/affiliate-links.html
   使い方: {{< affiliate-links product="商品名" price="99,999円" >}}
-  配置先: layouts/shortcodes/affiliate-links.html
 */}}
-
 {{ $product := .Get "product" }}
 {{ $price := .Get "price" }}
-{{ $encoded := $product | urlize }}
-
 <div class="af-buttons">
-
-  <!-- Amazon -->
-  <a class="af-btn af-btn-amazon"
-     href="https://www.amazon.co.jp/s?k={{ $product | urlize }}&tag={{ .Site.Params.amazon_tracking_id }}"
-     target="_blank" rel="nofollow noopener noreferrer">
-    🛒 Amazonで見る
-  </a>
-
-  <!-- 楽天市場 -->
+  <!-- 楽天市場（アフィリエイトリンク） -->
   <a class="af-btn af-btn-rakuten"
-     href="https://search.rakuten.co.jp/search/mall/{{ $product | urlize }}/"
+     href="https://hb.afl.rakuten.co.jp/hgc/52bc2ad9.fe24626e.52bc2ada.500f38d7/?pc=https://search.rakuten.co.jp/search/mall/{{ $product | urlize }}/"
      target="_blank" rel="nofollow noopener noreferrer">
     🛍️ 楽天で見る
   </a>
-
+  <!-- Amazon（アソシエイト未登録のため検索リンク） -->
+  <a class="af-btn af-btn-amazon"
+     href="https://www.amazon.co.jp/s?k={{ $product | urlize }}"
+     target="_blank" rel="nofollow noopener noreferrer">
+    🛒 Amazonで見る
+  </a>
   <!-- Yahoo!ショッピング -->
   <a class="af-btn af-btn-yahoo"
      href="https://shopping.yahoo.co.jp/search?p={{ $product | urlize }}"
      target="_blank" rel="nofollow noopener noreferrer">
     🏪 Yahoo!で見る
   </a>
-
 </div>
-
 {{ with $price }}
 <p class="price-note">
   💡 <strong>参考価格: {{ . }}</strong>（記事作成時点）<br>
